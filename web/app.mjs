@@ -27,6 +27,7 @@ function storedScores() {
 function show(section) {
   for (const el of [menu, play, results]) el.hidden = el !== section;
   document.body.classList.toggle("playing", section === play);
+  if (section === play) { updateViewport(); window.scrollTo(0, 0); }
 }
 function beep(correct) {
   if (!state.sound) return;
@@ -87,6 +88,13 @@ function fitBalloons() {
   choices.style.setProperty("--rows", best.rows);
   choices.style.setProperty("--balloon-width", Math.max(1, Math.floor(best.size)) + "px");
 }
+function updateViewport() {
+  const viewport = window.visualViewport;
+  document.body.style.setProperty("--game-height", Math.floor(viewport?.height ?? window.innerHeight) + "px");
+  fitBalloons();
+}
+window.addEventListener("resize", updateViewport);
+window.visualViewport?.addEventListener("resize", updateViewport);
 new ResizeObserver(fitBalloons).observe(choices);
 function selectBalloon(button, value) {
   if (!state.active || button.disabled) return;
@@ -168,9 +176,14 @@ soundToggle.addEventListener("click", () => {
 });
 document.addEventListener("visibilitychange", () => { if (!document.hidden) tick(); });
 if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+  let refreshing = false;
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if (!refreshing) { refreshing = true; location.reload(); }
+  });
   window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(() => {}));
 }
 show(menu);
+
 
 
 
