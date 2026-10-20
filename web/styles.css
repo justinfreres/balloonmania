@@ -41,3 +41,7 @@ body.playing footer{font-size:.65rem;flex-shrink:0}
 #play .balloon::before{bottom:-6px;border-left-width:4px;border-right-width:4px;border-top-width:7px;left:calc(50% - 4px)}
 #play .balloon-number{font-size:clamp(.7rem,2.5vw,1.4rem);min-width:0;padding:2px 4px;max-width:100%}
 @media(max-height:480px){body.playing .brand,body.playing footer{display:none}#play{padding:6px;gap:3px}#play .question-area{position:relative}#play .question-area>.stat-label,#play .question-area p{display:none}#play .question-area h1{font-size:1.5rem}#play .scoreboard>div{padding:0;flex-direction:row;justify-content:center;align-items:center;gap:6px}#play .scoreboard strong{font-size:1rem}#play .stat-label{font-size:.65rem}}
+/* Safari's layout viewport can be taller than the visible area behind its bars. */
+body.playing{min-height:0;height:var(--game-height,100svh);overflow:hidden;overscroll-behavior:none}
+body.playing .app{height:100%;padding-top:max(8px,env(safe-area-inset-top));padding-right:max(10px,env(safe-area-inset-right))}
+html:has(body.playing){height:100%;overflow:hidden;overscroll-behavior:none}
