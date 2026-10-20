@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#4e8af3">
+  <meta name="description" content="Balloon Math Mania: a 60-second arithmetic balloon-popping game.">
+  <title>Balloon Math Mania</title>
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app">
+    <header class="brand"><span aria-hidden="true">🎈</span> <span>Balloon <strong>Math Mania</strong></span></header>
+    <section id="menu" class="panel center">
+      <p class="eyebrow">Ready, set, POP!</p>
+      <h1>Math is a blast.</h1>
+      <p class="intro">Choose a level, then pop the balloon that solves each math problem before your 60 seconds run out.</p>
+      <div class="balloon-hero" aria-hidden="true"><span>🎈</span><span>🎈</span><span>🎈</span></div>
+      <h2>Choose your level</h2>
+      <div class="level-buttons">
+        <button class="level easy" data-level="0"><strong>Easy</strong><span>Start here</span></button>
+        <button class="level medium" data-level="1"><strong>Medium</strong><span>Level up</span></button>
+        <button class="level hard" data-level="2"><strong>Hard</strong><span>Bring it on</span></button>
+      </div>
+      <p class="hint">Solve addition, subtraction, and multiplication. Earn points for correct answers and unlock harder levels as you play.</p>
+    </section>
+    <section id="play" class="panel" hidden>
+      <div class="game-toolbar">
+        <button type="button" id="home-button" class="quiet" aria-label="Return to menu">← Menu</button>
+        <button type="button" id="sound-toggle" class="quiet" aria-pressed="true">Sound: On</button>
+      </div>
+      <div class="scoreboard" aria-label="Game status">
+        <div><span class="stat-label">Score</span><strong id="score">0</strong></div>
+        <div><span class="stat-label">Level</span><strong id="level">Easy</strong></div>
+        <div><span class="stat-label">Time</span><strong id="time">60</strong></div>
+      </div>
+      <div class="timer-track" role="progressbar" aria-label="Seconds remaining" aria-valuemin="0" aria-valuemax="60" aria-valuenow="60"><div id="timer-bar"></div></div>
+      <div class="question-area">
+        <span class="stat-label">What is the answer?</span>
+        <h1 id="equation">1 + 1 = ?</h1>
+        <p id="feedback" aria-live="polite">Pop the balloon with the right answer!</p>
+      </div>
+      <div id="balloons" class="balloon-grid" aria-label="Choose an answer"></div>
+    </section>
+    <section id="results" class="panel center" hidden>
+      <div class="medal" aria-hidden="true">🏆</div>
+      <p class="eyebrow">TIME'S UP</p>
+      <h1>Great try!</h1>
+      <p id="result-copy" class="intro"></p>
+      <p id="high-score" class="best"></p>
+      <div class="result-actions">
+        <button id="play-again" class="primary">Play again</button>
+        <button id="results-home" class="quiet">Choose a level</button>
+      </div>
+    </section>
+    <footer>Balloon Math Mania · Created by Justin Freres · <a href="https://justinfreres.com">JustinFreres.com</a><br>Scores stay on this device. No account, ads, or tracking.</footer>
+  </main>
+  <script type="module" src="./app.mjs"></script>
+</body>
+</html>
+

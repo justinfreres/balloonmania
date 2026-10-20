@@ -1,0 +1,19 @@
+{
+  "name": "Balloon Math Mania",
+  "short_name": "Balloon Mania",
+  "description": "A 60-second math balloon popping challenge",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#dcf3ff",
+  "theme_color": "#4e8af3",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
+
