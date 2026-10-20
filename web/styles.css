@@ -21,3 +21,23 @@ h2{margin:18px 0 16px;letter-spacing:-.04em}.level-buttons{width:100%;display:gr
 @media(max-width:360px){.balloon-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.panel{padding:14px 10px}}
 @media(prefers-reduced-motion:reduce){.balloon{animation:none;transition:none}.timer-track div{transition:none}}
 
+/* Keep every answer inside the available viewport, including landscape phones. */
+body.playing .app{height:100dvh;min-height:0;padding:8px max(10px,env(safe-area-inset-left)) max(8px,env(safe-area-inset-bottom));gap:6px}
+body.playing .brand{font-size:1.15rem;flex-shrink:0}
+body.playing footer{font-size:.65rem;flex-shrink:0}
+#play{min-height:0;display:flex;flex-direction:column;padding:12px;gap:6px}
+#play .game-toolbar,#play .scoreboard,#play .timer-track,#play .question-area{flex-shrink:0}
+#play .quiet{padding:6px 12px}
+#play .scoreboard{margin:0;gap:6px}
+#play .scoreboard>div{padding:4px}
+#play .scoreboard strong{font-size:1.25rem}
+#play .question-area{padding:0}
+#play .question-area h1{font-size:clamp(1.5rem,5vw,2.4rem);margin:2px 0}
+#play .question-area p{font-size:.8rem}
+#play .timer-track{height:6px}
+#play .balloon-grid{flex:1;min-height:0;padding:6px 4px 14px;gap:10px 8px;grid-template-columns:repeat(var(--columns,6),minmax(0,1fr));grid-template-rows:repeat(var(--rows,3),minmax(0,1fr));align-items:center}
+#play .balloon{width:min(100%,var(--balloon-width,90px));max-width:none;min-width:0;min-height:0;aspect-ratio:4/5}
+#play .balloon::after{height:10px}
+#play .balloon::before{bottom:-6px;border-left-width:4px;border-right-width:4px;border-top-width:7px;left:calc(50% - 4px)}
+#play .balloon-number{font-size:clamp(.7rem,2.5vw,1.4rem);min-width:0;padding:2px 4px;max-width:100%}
+@media(max-height:480px){body.playing .brand,body.playing footer{display:none}#play{padding:6px;gap:3px}#play .question-area{position:relative}#play .question-area>.stat-label,#play .question-area p{display:none}#play .question-area h1{font-size:1.5rem}#play .scoreboard>div{padding:0;flex-direction:row;justify-content:center;align-items:center;gap:6px}#play .scoreboard strong{font-size:1rem}#play .stat-label{font-size:.65rem}}
