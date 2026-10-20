@@ -26,6 +26,7 @@ function storedScores() {
 }
 function show(section) {
   for (const el of [menu, play, results]) el.hidden = el !== section;
+  document.body.classList.toggle("playing", section === play);
 }
 function beep(correct) {
   if (!state.sound) return;
@@ -68,7 +69,25 @@ function renderRound() {
     button.addEventListener("click", () => selectBalloon(button, number));
     choices.append(button);
   });
+  fitBalloons();
 }
+function fitBalloons() {
+  const count = choices.children.length;
+  if (play.hidden || !count) return;
+  const width = Math.max(1, choices.clientWidth - 8);
+  const height = Math.max(1, choices.clientHeight - 20);
+  let best = { size: 0, columns: 1, rows: count };
+  for (let columns = 1; columns <= count; columns++) {
+    const rows = Math.ceil(count / columns);
+    const size = Math.min(105, (width - (columns - 1) * 8) / columns,
+      ((height - (rows - 1) * 10) / rows - 10) * 0.8);
+    if (size > best.size) best = { size, columns, rows };
+  }
+  choices.style.setProperty("--columns", best.columns);
+  choices.style.setProperty("--rows", best.rows);
+  choices.style.setProperty("--balloon-width", Math.max(1, Math.floor(best.size)) + "px");
+}
+new ResizeObserver(fitBalloons).observe(choices);
 function selectBalloon(button, value) {
   if (!state.active || button.disabled) return;
   tick();
@@ -152,4 +171,6 @@ if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
   window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(() => {}));
 }
 show(menu);
+
+
 
